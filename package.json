@@ -1,0 +1,14 @@
+{
+  "name": "bsjss",
+  "version": "0.0.1",
+  "description": "A Brawl Stars Server Emulator by Lwitchy. Based on nodebrawl-core v2.3.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lwitchy",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3": "^5.1.4"
+  }
+}
