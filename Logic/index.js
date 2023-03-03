@@ -23,7 +23,7 @@ server.on('connection', async (client) => {
     client.log('[SERVER]: New Connection!')
     const packets = Messages.getPackets();
     client.player = new Player()
-    client.db = null
+    client.db = dbmanager
   
     client.on('data', async (packet) => {
       const message = {
