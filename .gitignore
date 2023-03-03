@@ -1,4 +1,3 @@
 node_modules
-start.bat
 Server/Database/Players.db
 *.db
