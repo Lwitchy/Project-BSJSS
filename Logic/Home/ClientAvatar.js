@@ -12,11 +12,15 @@ class ClientAvatar{
         self.writeVInt(self.player.low_id) //ID?
         self.writeVInt(self.player.low_id) //ID?
     
-        self.writeString(self.player.name)
-        self.writeVInt(1)
+        if (self.player.name === "Player" && !self.player.name_set) {
+            self.writeString("Player")
+            self.writeVInt(0)
+        }else{
+            self.writeString(self.player.name)
+            self.writeVInt(1)
+        }
     
         self.writeString()
-    
         self.writeVInt(15) // Commodity Count
     
     

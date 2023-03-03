@@ -5,7 +5,7 @@ class DatabaseManager{
         this.player = player
         // Connect to database
         console.log("Attempt to connect database!")
-        this.db = new sqlite3.Database('../Server/Database/Players.db', (err)=>{
+        this.db = new sqlite3.Database('../Database/Players.db', (err)=>{
             if(err){// Failed
                 console.log('Failed to connect database!')
             }else{// Success
@@ -33,6 +33,7 @@ class DatabaseManager{
             'token': token,
             'id': low_id,
             'name': this.player.name,
+            'name_set': this.player.name_set,
             'gems': this.player.gems,
             'exp_points': this.player.gems,
             'trophies': this.player.trophies,
@@ -56,21 +57,23 @@ class DatabaseManager{
     }
 
     load_data(high_id, low_id, token){// Load Data and return with it
-        return new Promise((resolve, reject)=>{// Spend 30 min to find how to return async function?
+        return new Promise((resolve, reject)=>{// Spend 30 min to find how to return? ahh
             this.db.get(`SELECT * from main where id=${low_id} AND token="${token}"`, (err,result)=>{
-                if(err){// yes and I'm talking in code with myself am I right?
+                if(err){// yes and I'm talking in code with myself
                     console.log(err)
-                }else{// maybe no ig need to sleep
+                    reject()
+                }else{// ig need to sleep
                     resolve(result['data'])
                 }// I feel bad enough for today
             })    
-        })// tomorrow now finish
+        })// It's tomorrow now let's finish
     }
 
     update_data(high_id, low_id, token, item, value){
-        this.db.get(`SELECT * from main where id=${low_id} AND token="${token}"`, (err,result)=>{
+        return new Promise((resolve, reject) => {this.db.get(`SELECT * from main where id=${low_id} AND token="${token}"`, (err,result)=>{
             if(err){
                 console.log(err)// imagine
+                reject()
             }else{
                 // Loaded DATA
                 const loaded_data = result['data']
@@ -81,9 +84,10 @@ class DatabaseManager{
                 // Dump Data
                 const dump_data = JSON.stringify(data)// dump json data again damn
                 this.db.run(`UPDATE main SET data='${dump_data}' WHERE id=${low_id} AND token="${token}"`)
+                resolve()
             }
+            })
         })
-
     }
 
 }// finally it's enough I will add other function later

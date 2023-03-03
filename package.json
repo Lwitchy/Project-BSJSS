@@ -9,6 +9,7 @@
   "author": "Lwitchy",
   "license": "ISC",
   "dependencies": {
+    "crypto": "^1.0.1",
     "sqlite3": "^5.1.4"
   }
 }

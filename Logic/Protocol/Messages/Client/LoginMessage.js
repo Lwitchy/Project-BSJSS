@@ -1,6 +1,7 @@
 const PiranhaMessage = require('../../PiranhaMessage')
 const LoginOkMessage = require('../../Messages/Server/LoginOkMessage')
 const OwnHomeData = require('../Server/OwnHomeDataMessage')
+const crypto = require('crypto')
 
 class LoginMessage extends PiranhaMessage {
   constructor (bytes, client, player, db) {
@@ -23,39 +24,52 @@ class LoginMessage extends PiranhaMessage {
   }
 
   async process () {
-    if(this.player.state == 1){
-      var pass = false
-      if(this.player.low_id == 0){
+    function generate_token(){// Generating user token))
+      const currentDateTime = new Date().valueOf().toString();
+      const random = Math.random().toString();
+      return crypto.createHash('sha1').update(currentDateTime + random).digest('hex');      
+    }
+
+    function generate_id(length){// Generating used id between 0-9 random numbers
+      let randomNumberString = '';
+      for (let i = 0; i < length; i++) {
+        randomNumberString += Math.floor(Math.random() * 10);
+      }
+      return parseInt(randomNumberString);      
+    }
+
+    if(this.player.state == 1){// State check (ig I will not share with crypto so u can delete)
+      if(this.player.low_id == 0){// If low_id == 0 means there is no id saved in client so new account
         // Generate New ID
-        var id = 1
-        var token = "new_token"
+        var id = generate_id(8)
+        var token = generate_token()
 
         // Set Token and ID
         this.player.low_id = id
         this.player.token = token
 
-        console.log(this.player.low_id)
-        console.log(this.player.token)
-
         // Create new data in DB
         this.db.create_account(id, token)
 
-        new LoginOkMessage(this.client, this.player).send()
+        // And send loginOK, OwnHomeData
+        new LoginOkMessage(this.client, this.player, id, token).send()
         new OwnHomeData(this.client, this.player).send()
-      }else{
+
+      }else{// Load account with id come from client
         var player = this.player
         var data = null
 
         this.db.load_data(0, this.player.low_id, this.player.token).then(function(result){
           // Set variables from result
           data = JSON.parse(result)
-
-        }).then((load_data) => {
+        }).then((load_data) => {// After finish load data set variables
           player.name = data['name']
+          player.name_set = data['name_set']
           player.gems = data['gems']
           player.exp_points = data['exp_points']
           player.trophies = data['trophies']
           
+          // And send loginOK, OwnHomeData
           new LoginOkMessage(this.client, this.player).send()
           new OwnHomeData(this.client, this.player).send()
         })

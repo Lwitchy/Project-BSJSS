@@ -5,7 +5,7 @@ class MessageFactory{
     constructor () {
         this.packets = {}
     
-        fs.readdir('./Protocol/Messages/Client', (err, files) => {
+        fs.readdir('../../Logic/Protocol/Messages/Client', (err, files) => {
           if (err)console.log(err)
           files.forEach(e => {
             try{

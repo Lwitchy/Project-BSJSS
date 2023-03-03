@@ -11,7 +11,6 @@ class OwnHomeData extends PiranhaMessage{
         this.player = player
         this.version = 1
         this.timestamp = Math.floor(Date.now() / 1000)
-        console.log(this.timestamp)
     }
 
     async encode(){    

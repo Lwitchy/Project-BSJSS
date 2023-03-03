@@ -1,8 +1,8 @@
 // Project BSJSS
 const net = require('net')
-const Player = require('./Instances/Player.js')
-const MessageFactory = require('./Protocol/MessageFactory.js')
-const DB = require('../Server/DatabaseManager/index')
+const Player = require('../../Logic/Instances/Player.js')
+const MessageFactory = require('../../Logic/Protocol/MessageFactory.js')
+const DB = require('../DatabaseManager/index')
 
 const server = new net.Server()
 const Messages = new MessageFactory()

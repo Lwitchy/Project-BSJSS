@@ -6,7 +6,8 @@ class Player {
     token = "None"
 
     // Player Information
-    name = "Lwitchy"
+    name = "Player"
+    name_set = false
     gems = 0
     exp_points = 0
     trophies = 0

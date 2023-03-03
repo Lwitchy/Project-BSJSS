@@ -24,9 +24,7 @@ class ClientHelloMessage extends PiranhaMessage{
     }
 
     async process(){
-        
         new ServerHelloMessage(this.client).send()
-
     }
 }
 

@@ -2,7 +2,7 @@ const PiranhaMessage = require('../../PiranhaMessage')
 
 
 class LoginOkMessage extends PiranhaMessage{
-    constructor(client, player){
+    constructor(client, player, low_id, token){
         super()
         this.id = 20104
         this.client = client
@@ -11,8 +11,8 @@ class LoginOkMessage extends PiranhaMessage{
     }
 
     async encode(){
-        this.writeLong(0, 1)
-        this.writeLong(0, 1)
+        this.writeLong(0, this.player.low_id)
+        this.writeLong(0, this.player.low_id)
 
         this.writeString(this.player.token)// Tokenki
         this.writeString()// Facebook ID
