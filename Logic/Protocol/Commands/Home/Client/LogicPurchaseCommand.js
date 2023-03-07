@@ -13,6 +13,7 @@ class LogicPurchaseCommand{
         var offer_id = offers[this.offer_index]['ID']
         var offer_count = offers[this.offer_index]['Count']
         var offer_char = offers[this.offer_index]['DataReference'][1]
+        var offer_itemID = offers[this.offer_index]['ItemID']
         var offer_currency = offers[this.offer_index]['Currency']
         var offer_cost = offers[this.offer_index]['Cost']
 
@@ -33,6 +34,7 @@ class LogicPurchaseCommand{
         }else if(offer_currency == 3){
             // starpoints
         }
+        /* Add your offers to here! */
 
         // Give Items
         if (offer_id == 1){
@@ -43,6 +45,17 @@ class LogicPurchaseCommand{
             self.player.coins += offer_count
             self.db.update_data(0, self.player.low_id, self.player.token, 'coins', self.player.coins)
             new AvailableServerCommand(self.client, self.player, 203).send()            
+        }
+
+        if (offer_id == 4){
+            var item = {'Amount': offer_count, 'DataRef': [0,0], 'Value': 9, 'SkinID': [29,offer_itemID], 'PinID': [0,0], 'SPGID': [0,0]}
+            self.player.delivery_items['Type'] = 100
+            self.player.delivery_items['Items'].push(item)
+
+            self.player.unlocked_skins.push(offer_itemID)
+            self.db.update_data(0,self.player.low_id, self.player.token, 'unlocked_skins', self.player.unlocked_skins)
+
+            new AvailableServerCommand(self.client, self.player, 203).send()
         }
 
         if (offer_id == 16){

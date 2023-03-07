@@ -22,13 +22,13 @@ class Player {
     inbox = []
     offers = [
       {
-          "ID": 1,
-          "Count": 10,
-          "DataReference": [16,0],
-          "ItemID": 0,
+          "ID": 4,
+          "Count": 1,
+          "DataReference": [0, 0],
+          "ItemID": 52,
           "Currency": 0,
           "Cost": 0,
-          "State": 2,
+          "State": 0,
           "isDaily": false,
           "oldCost": 0,
           "offerText": "",
@@ -38,7 +38,8 @@ class Player {
           "Extra": 0,
           "isOneTimePurchase": false
       }
-  ]
+
+    ]
 
 
     // Unlocked Data

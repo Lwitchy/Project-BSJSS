@@ -33,17 +33,19 @@ class LogicGiveDeliveryItems{
                 self.writeDataReference(rewards[x]['SPGID'][0], rewards[x]['SPGID'][1])
                 self.writeVInt(0)
             }
-            self.writeBoolean(false)
-            self.writeVInt(0)
-            self.writeVInt(0)
-            self.writeVInt(0)
-            self.writeVInt(0)
-            self.writeVInt(0)
-            self.writeVInt(0)
+    }
+    
+    self.writeBoolean(false)
 
-            self.writeVInt(0)
-            self.writeVInt(0)    
-        }
+    self.writeVInt(0)// milstoneid
+    self.writeVInt(0)// milstone track
+    self.writeVInt(0)
+    self.writeVInt(0)
+    self.writeVInt(0)// season end ril
+    self.writeVInt(0)
+
+    self.writeVInt(0)
+    self.writeVInt(0)    
     }
 
     constructor() {
