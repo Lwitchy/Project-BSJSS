@@ -23,6 +23,11 @@
 - Set Avatar name
 - CSV Reader (Only Characters and Card IDs)
 
+# How to connect Server?
+Download the BSDS Client for connect server
+
+https://www.mediafire.com/file/4lqxq2phdswikv1/com.projectbsds.v3999-rev1.apk/file
+
 # Screenshots
 ![WhatsApp Image 2023-03-07 at 14 36 51](https://user-images.githubusercontent.com/98178721/223398490-51dd3cf7-2c69-4b12-a310-e9fb7b8ce6c9.jpg)
 ![WhatsApp Image 2023-03-07 at 14 36 49](https://user-images.githubusercontent.com/98178721/223398394-485c80bd-e01f-45e8-a0e0-bba5d0f78519.jpg)
