@@ -19,7 +19,7 @@
 # Features of this server
 - Based on nodeJS
 - SQLITE3 Database (Create Account, Load Account, Update Account)
-- 3 shop offer type working (You can write others I showed how it's working)
+- 3 shop offer type working (Gems, Coins, Skins also you can write others I showed how it's working)
 - Set Avatar name
 - CSV Reader (Only Characters and Card IDs)
 
