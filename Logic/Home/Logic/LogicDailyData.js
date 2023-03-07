@@ -1,17 +1,21 @@
+var LogicShopData = require('./LogicShopData')
 class LogicDailyData{
     encode(self){
         // Logic Daily Data Start
-        self.writeVInt(self.timestamp) //Timestamp
-        self.writeVInt(self.timestamp) //Timestamp
-    
-        self.writeVInt(self.timestamp) //Timestamp
-        self.writeVInt(self.timestamp) //Timestamp
+        self.writeVInt(0) //Timestamp
+        self.writeVInt(0) //Timestamp
+
+        self.writeVInt(0) //Timestamp
+        self.writeVInt(0) //Timestamp
+
     
         self.writeVInt(self.player.trophies)//Trophies
         self.writeVInt(self.player.highest_trophies)//HTRP
         self.writeVInt(self.player.highest_trophies)//HTRP
         self.writeVInt(self.player.trophyroad_reward)//TrophyRoadReward
+
         self.writeVInt(self.player.exp_points)//EXP
+
         self.writeDataReference(28, self.player.profile_icon)
         self.writeDataReference(43, self.player.name_color)
     
@@ -39,10 +43,10 @@ class LogicDailyData{
         // Selected Group Skin End
     
         // Unlocked Skins Array
-        self.writeVInt(0)
-        /* for (var x in self.player.unlocked_skins){
+        self.writeVInt(self.player.unlocked_skins.length)
+        for (var x in self.player.unlocked_skins){
           self.writeDataReference(29, self.player.unlocked_skins[x])
-        }*/
+        }
         // Unlocked Skins Array End
     
         // Unlocked Skin Purchase Option
@@ -64,12 +68,8 @@ class LogicDailyData{
         self.writeVInt(0) // Starpower Drop
         self.writeVInt(0) // Gadget Drop
     
-        self.writeVInt(5) // Rarity Count
-        self.writeVInt(1) // Rare Drop
-        self.writeVInt(1) // Super Rare Drop
-        self.writeVInt(1) // Epic Drop
-        self.writeVInt(1) // Mythic Drop
-        self.writeVInt(1) // Legendary Drop
+        self.writeVInt(0) // Rarity Count
+
     
     
         self.writeByte(4)  // Shop Token Doubler
@@ -79,13 +79,13 @@ class LogicDailyData{
         self.writeVInt(0)  // Change Name Cost
         self.writeVInt(0)  // Timer For the Next Name Change
     
-    
-        self.writeVInt(0) // Shop array
-    
-        self.writeBoolean(false)
-    
-        self.writeVInt(200)  // Available tokens from battles
-        self.writeVInt(-64)  // Timer for new tokens
+        
+        new LogicShopData().encode(self)
+        
+        self.writeVInt(0)
+        
+        self.writeVInt(0)  // Available tokens from battles
+        self.writeVInt(0)  // Timer for new tokens
     
         self.writeVInt(0)
     
@@ -96,6 +96,7 @@ class LogicDailyData{
         self.writeString(self.player.region)
         self.writeString(self.player.content_creator)
     
+        // Home Events arraychiki
         self.writeVInt(0)
     
         self.writeVInt(0)// CoolDown Entry Array
@@ -107,7 +108,18 @@ class LogicDailyData{
         self.writeVInt(0) // Tokens
         self.writeVInt(0) // isBrawlPass
         self.writeVInt(0)
-        self.writeVInt(0)
+
+        self.writeByte(2)
+        self.writeInt(4294967292)
+        self.writeInt(4294967295)
+        self.writeInt(511)
+        self.writeInt(0)
+
+        self.writeByte(1)
+        self.writeInt(4294967292)
+        self.writeInt(4294967295)
+        self.writeInt(511)
+        self.writeInt(0)
         // BrawlPass array End
     
         self.writeVInt(0)
@@ -118,8 +130,21 @@ class LogicDailyData{
         // Quest Array End
     
         // Emojis and Thumbnails Array
-        self.writeBoolean(true) 
-        self.writeVInt(0)
+        self.writeBoolean(true)
+        self.writeVInt(self.player.unlocked_pins.length + self.player.unlocked_thumbnails.length)  // Vanity Count
+        for(var x in self.player.unlocked_pins){
+            self.writeDataReference(52, x)
+            self.writeVInt(1)
+            self.writeVInt(1)
+            self.writeVInt(1)
+        }
+
+        for(var i in self.player.unlocked_thumbnails){
+            self.writeDataReference(28, i)
+            self.writeVInt(1)
+            self.writeVInt(1)
+            self.writeVInt(1)
+        }
         // Emojis and Thumbnails Array End
     
         // ig thumnails? like comes with power league pfps
@@ -128,9 +153,6 @@ class LogicDailyData{
         // end
         
         // Logic Daily Data End
-    }
-    
-    constructor(){
     }
 }
 

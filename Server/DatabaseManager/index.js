@@ -35,6 +35,8 @@ class DatabaseManager{
             'name': this.player.name,
             'name_set': this.player.name_set,
             'gems': this.player.gems,
+            'coins': this.player.coins,
+            'starpoints': this.player.starpoints,
             'exp_points': this.player.gems,
             'trophies': this.player.trophies,
             'highest_trophies': this.player.highest_trophies,
@@ -43,6 +45,20 @@ class DatabaseManager{
             'profile_icon': this.player.profile_icon,
             'region': this.player.region,
             'content_creator': this.player.content_creator,
+            'inbox': this.player.inbox,
+            'offers': this.player.offers,
+            'unlocked_brawlers': this.player.unlocked_brawlers,
+            'unlocked_skins': this.player.unlocked_skins,
+            'unlocked_pins': this.player.unlocked_pins,
+            'unlocked_thumbnails': this.player.unlocked_thumbnails,
+            'unlocked_gadgets': this.player.unlocked_gadgets,
+            'selected_brawler': this.player.selected_brawler,
+            'selected_skins': this.player.selected_skins,
+            'selected_gadgets': this.player.selected_gadgets,
+            'brawlers_trophies': this.player.brawlers_trophies,
+            'brawlers_high_trophies': this.player.brawlers_high_trophies,
+            'brawlers_level': this.player.brawlers_level,
+            'brawlers_powerpoints': this.player.brawlers_powerpoints
         }
 
         // Dump JSON data
@@ -66,7 +82,7 @@ class DatabaseManager{
                     resolve(result['data'])
                 }// I feel bad enough for today
             })    
-        })// It's tomorrow now let's finish
+        })
     }
 
     update_data(high_id, low_id, token, item, value){
@@ -90,6 +106,8 @@ class DatabaseManager{
         })
     }
 
-}// finally it's enough I will add other function later
+}
+
+
 
 module.exports = DatabaseManager

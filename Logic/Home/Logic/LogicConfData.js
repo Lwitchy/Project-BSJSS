@@ -36,7 +36,7 @@ class LogicConfData{
         self.writeVInt(0)  // EventsBeginCountdown
         self.writeVInt(0)  // Timer
         self.writeVInt(0)  // tokens reward for new event
-        self.writeDataReference(15, 13)  // MapID
+        self.writeDataReference(15, 7)  // MapID
         self.writeVInt(-64)  // GameModeVariation
         self.writeVInt(2)  // State
         self.writeString()
@@ -54,7 +54,6 @@ class LogicConfData{
         self.writeVInt(0)  // Chronos Text Entry
         self.writeVInt(-64)
         self.writeBoolean(false)
-    
     
         self.writeVInt(0)  // Coming Up Events Count
     
@@ -80,30 +79,15 @@ class LogicConfData{
         self.writeVInt(1200)
         self.writeVInt(2600)
     
-        self.writeBoolean(false)  // Show Offers Packs
+        self.writeBoolean(true)  // Show Offers Packs
     
         //Locked for chronos array
         self.writeVInt(0)// Count
         //Locked for chronos array End
     
-        self.writeVInt(13)  // IntValueEntry
-    
+        self.writeVInt(1)  // IntValueEntry
         self.writeLongInt(1, 41000000 + 28) // ThemeID
 
-        self.writeLongInt(61, 36270) // SupportDisabled State | if 36218 < state its true
-
-        self.writeLongInt(29, 10) // Skin Group Active For Campaign | 10 enable | 5 Bad Randoms 7 Hallowen 10 Brawlywood
-        self.writeLongInt(50, 0) // Coming up quests placeholder
-        self.writeLongInt(14, 0) // Double Token Event
-        self.writeLongInt(31, 0) // Gold Rush Event
-    
-        self.writeLongInt(79, 149999)
-        self.writeLongInt(80, 160000)
-        self.writeLongInt(28, 4)
-        self.writeLongInt(74, 1)
-        self.writeLongInt(78, 1)
-        self.writeLongInt(17, 4)
-        self.writeLongInt(10046, 1)
     
         self.writeVInt(0)  // Timed Int Value Entry
     
@@ -112,13 +96,11 @@ class LogicConfData{
         self.writeVInt(0)
     
         self.writeVInt(0)
-    
         self.writeVInt(0)
         // Logic Conf Data End
     }
 
-    constructor(){
-    }
+
 }
 
 module.exports = LogicConfData

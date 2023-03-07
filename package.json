@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "crypto": "^1.0.1",
+    "csv": "^6.2.7",
     "sqlite3": "^5.1.4"
   }
 }

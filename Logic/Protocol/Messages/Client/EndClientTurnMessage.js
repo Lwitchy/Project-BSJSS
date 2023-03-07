@@ -1,5 +1,5 @@
 const PiranhaMessage = require('../../PiranhaMessage')
-
+const LogicPurchaseCommand = require('../../Commands/Home/Client/LogicPurchaseCommand')
 
 class EndClientTurnMessage extends PiranhaMessage{
     constructor(bytes, client, player, db){
@@ -19,10 +19,14 @@ class EndClientTurnMessage extends PiranhaMessage{
     }
     async process(){
         var commands = {
-            
+            519: LogicPurchaseCommand
         }
 
-        console.log("Command ID:", this.command_id)
+        if(this.command_id in commands){
+            var command = new commands[this.command_id]
+            command.decode(this)
+            command.process(this, this.db)
+        }
     }
 }
 

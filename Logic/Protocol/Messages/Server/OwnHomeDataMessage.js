@@ -3,12 +3,14 @@ const ClientHome = require('../../../Home/ClientHome')
 const ClientAvatar = require('../../../Home/ClientAvatar')
 
 
+
 class OwnHomeData extends PiranhaMessage{
-    constructor(client, player){
+    constructor(client, player, serverSettings){
         super()
         this.id = 24101
         this.client = client
         this.player = player
+        this.serverSettings = serverSettings
         this.version = 1
         this.timestamp = Math.floor(Date.now() / 1000)
     }

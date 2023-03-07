@@ -1,19 +1,20 @@
 // Project BSJSS
 const net = require('net')
 const Player = require('../../Logic/Instances/Player.js')
+const Server = require('../../Logic/Instances/Server')
 const MessageFactory = require('../../Logic/Protocol/MessageFactory.js')
 const DB = require('../DatabaseManager/index')
 
+const serverSettings = new Server()
+const playerClass = new Player()
 const server = new net.Server()
 const Messages = new MessageFactory()
-const dbmanager = new DB(new Player())
+const dbmanager = new DB(playerClass)
 
-// Variables
-const PORT = 9339
+serverSettings.loadCsvData()
+playerClass.update_brawler_data(serverSettings)
 
 
-
-// Server Listening
 server.on('connection', async (client) => {
     client.setNoDelay(true)
     client.log = function (text) {
@@ -22,8 +23,9 @@ server.on('connection', async (client) => {
   
     client.log('[SERVER]: New Connection!')
     const packets = Messages.getPackets();
-    client.player = new Player()
+    client.player = playerClass
     client.db = dbmanager
+    client.serverSettings = serverSettings
   
     client.on('data', async (packet) => {
       const message = {
@@ -35,21 +37,21 @@ server.on('connection', async (client) => {
       }
       if (packets.indexOf(String(message.id)) !== -1) {
         try {
-          const packet = new (Messages.handle(message.id))(message.payload, client, client.player, client.db)
+          const packet = new (Messages.handle(message.id))(message.payload, client, client.player, client.db, client.serverSettings)
   
-          client.log(`[CLIENT]: New Packet! ${message.id} (${packet.constructor.name})`)
+          client.log(`[CLIENT][<<]: New Packet! ${message.id} (${packet.constructor.name})`)
           await packet.decode()
           await packet.process()
         } catch (e) {
           console.log(e)
         }
       } else {
-        client.log(`Packet not handled! ${message.id}!`)
+        client.log(`[CLIENT][<<]: Packet not handled! ${message.id}!`)
       }
     })
   
     client.on('end', async () => {
-      return client.log('Client disconnected.')
+      return client.log('[SERVER]: Client disconnected.')
     })
   
     client.on('error', async error => {
@@ -60,8 +62,8 @@ server.on('connection', async (client) => {
     })
   })
   
-  server.once('listening', () => console.log(`Server Listening ${PORT} PORT`))
-  server.listen(PORT)
+  server.once('listening', () => console.log(`Server Listening ${serverSettings.server_port} PORT`))
+  server.listen(serverSettings.server_port)
 
 
   

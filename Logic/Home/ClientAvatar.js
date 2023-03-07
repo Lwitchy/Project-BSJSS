@@ -3,13 +3,13 @@
 class ClientAvatar{
     encode(self){
         // Logic Client Avatar Start
-        self.writeVInt(self.player.low_id) //ID?
-        self.writeVInt(self.player.low_id) //ID?
-    
-        self.writeVInt(self.player.low_id) //ID?
+        self.writeVInt(0) //ID?
         self.writeVInt(self.player.low_id) //ID?
     
+        self.writeVInt(0) //ID?
         self.writeVInt(self.player.low_id) //ID?
+    
+        self.writeVInt(0) //ID?
         self.writeVInt(self.player.low_id) //ID?
     
         if (self.player.name === "Player" && !self.player.name_set) {
@@ -25,9 +25,14 @@ class ClientAvatar{
     
     
         // Resources Array
-        self.writeVInt(1)
-        self.writeDataReference(23, 0)
-        self.writeVInt(1)
+        self.writeVInt(self.player.unlocked_brawlers.length + 1)
+        for(var x in self.player.unlocked_brawlers){
+            self.writeDataReference(23, self.serverSettings.all_brawlers_card_id[self.player.unlocked_brawlers[x]])
+            self.writeVInt(1)
+        }
+
+        self.writeDataReference(5,8)
+        self.writeVInt(self.player.coins)
         // Resources Array End
     
         // Brawlers Trophies Array
@@ -92,11 +97,7 @@ class ClientAvatar{
         self.writeVInt(0)  // NpcWinCount
         self.writeVInt(0)  // NpcLoseCount
         self.writeVInt(2)  // TutorialState | shouldGoToFirstTutorialBattle = State == 0
-        self.writeVInt(self.timestamp)  // TimeStamp
-    }
-
-
-    constructor(){
+        self.writeVInt(0)  // TimeStamp
     }
 }
 

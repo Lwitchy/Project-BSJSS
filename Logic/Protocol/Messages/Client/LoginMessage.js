@@ -4,10 +4,11 @@ const OwnHomeData = require('../Server/OwnHomeDataMessage')
 const crypto = require('crypto')
 
 class LoginMessage extends PiranhaMessage {
-  constructor (bytes, client, player, db) {
+  constructor (bytes, client, player, db, serverSettings) {
     super(bytes)
     this.client = client
     this.player = player
+    this.serverSettings = serverSettings
     this.db = db
     this.id = 10101
     this.version = 0
@@ -53,7 +54,7 @@ class LoginMessage extends PiranhaMessage {
 
         // And send loginOK, OwnHomeData
         new LoginOkMessage(this.client, this.player, id, token).send()
-        new OwnHomeData(this.client, this.player).send()
+        new OwnHomeData(this.client, this.player,this.serverSettings).send()
 
       }else{// Load account with id come from client
         var player = this.player
@@ -62,16 +63,36 @@ class LoginMessage extends PiranhaMessage {
         this.db.load_data(0, this.player.low_id, this.player.token).then(function(result){
           // Set variables from result
           data = JSON.parse(result)
-        }).then((load_data) => {// After finish load data set variables
+        }).then(() => {// After finish load data set variables
           player.name = data['name']
           player.name_set = data['name_set']
           player.gems = data['gems']
           player.exp_points = data['exp_points']
           player.trophies = data['trophies']
+          player.highest_trophies = data['highest_trophies']
+          player.trophyroad_reward = data['trophyroad_reward']
+          player.name_color = data['name_color']
+          player.profile_icon = data['profile_icon']
+          player.region = data['region']
+          player.content_creator = data['content_creator']
+          player.inbox = data['inbox']
+          //player.offers = data['offers']
+          player.unlocked_brawlers = data['unlocked_brawlers']
+          player.unlocked_skins = data['unlocked_skins']
+          player.unlocked_pins = data['unlocked_pins']
+          player.unlocked_thumbnails = data['unlocked_thumbnails']
+          player.unlocked_gadgets = data['unlocked_gadgets']
+          player.selected_brawler = data['selected_brawler']
+          player.selected_skins = data['selected_skins']
+          player.selected_gadgets = data['selected_gadgets']
+          player.brawlers_trophies = data['brawlers_trophies']
+          player.brawlers_high_trophies = data['brawlers_high_trophies']
+          player.brawlers_level = data['brawlers_level']
+          player.brawlers_powerpoints = data['brawlers_powerpoints']
           
           // And send loginOK, OwnHomeData
           new LoginOkMessage(this.client, this.player).send()
-          new OwnHomeData(this.client, this.player).send()
+          new OwnHomeData(this.client, this.player, this.serverSettings).send()
         })
       }
 

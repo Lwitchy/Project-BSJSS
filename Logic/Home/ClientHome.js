@@ -8,7 +8,7 @@ class ClientHome{
 
         // Client Home Start
         self.writeInt(0)  // PlayerID
-        self.writeInt(0)  // PlayerID
+        self.writeInt(self.player.low_id)  // PlayerID
     
         self.writeVInt(0) // Notification Factory
     
@@ -17,9 +17,6 @@ class ClientHome{
         self.writeVInt(0)  // Gatcha Drop
         self.writeVInt(0)  // FriendlyStarPower
         // Client Home End
-
-    }
-    constructor(){
 
     }
 }

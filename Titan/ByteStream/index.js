@@ -245,7 +245,7 @@ class ByteStream {
     header.writeUInt16BE(this.version, 5)
 
     this.client.write(Buffer.concat([header, this.buffer, Buffer.from([0xFF, 0xFF, 0x0, 0x0, 0x0, 0x0, 0x0])]))
-    this.client.log(`Packet ${this.id} (${this.constructor.name}) was sent.`)
+    this.client.log(`[SERVER][>>]: Packet ${this.id} (${this.constructor.name}) was sent.`)
   }
 }
 
