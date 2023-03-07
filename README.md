@@ -26,7 +26,9 @@
 # How to connect Server?
 Download the BSDS Client for connect server
 
-https://www.mediafire.com/file/4lqxq2phdswikv1/com.projectbsds.v3999-rev1.apk/file
+Android: https://www.mediafire.com/file/4lqxq2phdswikv1/com.projectbsds.v3999-rev1.apk/file
+
+IOS: https://mega.nz/file/9p9AHIhI#nzbAHRjy-eJhjlxAmbYSLVj6zvOg_OXPdgy46JI25ss
 
 # Screenshots
 ![WhatsApp Image 2023-03-07 at 14 36 51](https://user-images.githubusercontent.com/98178721/223398490-51dd3cf7-2c69-4b12-a310-e9fb7b8ce6c9.jpg)
