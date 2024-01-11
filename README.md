@@ -1,4 +1,6 @@
 # ABANDONED PROJECT - I do not suggest you to use this, I don't have idea to continue this project maybe if some miracle happens
+# NOTE
+ This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see <a href="https://supercell.com/en/fan-content-policy/">Supercell’s Fan Content  Policy<a/>
 # PROJECT-BSJSS
  BSJSS - V39 Brawl stars server based on nodeJS.
 
