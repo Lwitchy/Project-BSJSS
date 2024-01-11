@@ -1,3 +1,4 @@
+# ABANDONED PROJECT - I do not suggest you to use this, I don't have idea to continue this project maybe if some miracle happens
 # PROJECT-BSJSS
  BSJSS - V39 Brawl stars server based on nodeJS.
 
